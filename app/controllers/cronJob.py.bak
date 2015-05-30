@@ -1,0 +1,29 @@
+from applications.PriceDropMaster.modules.scraper import *
+from gluon.tools import Mail
+
+def cronJob():
+    print 'cron job executed'
+
+    mail = Mail()
+    mail.settings.server = 'smtp.gmail.com:587'
+    mail.settings.sender = 'liuhang12388@gmail.com'
+    mail.settings.login = 'liuhang12388@gmail.com:t56A2BA08K'
+
+    print 'mail server OK'
+
+    for row in db(db.subscription.id > 0).select():
+        print row.email, row.link, row.price
+        scraper = Scraper(row.link)
+        cprice = scraper.scrap()
+        print cprice
+        if cprice < row.price:
+            print 'preparing email'
+            mail.send(row.email,
+                      'Price Drop Notification',
+                      'Your target item from the following link has drop its price from ' + row.price + ' to ' + cprice + '.'/n
+                      + row.link)
+            print 'mail sent'
+            db(db.subscription.link == row.link).update(price = cprice)
+            print 'price reset'
+
+    db.commit()

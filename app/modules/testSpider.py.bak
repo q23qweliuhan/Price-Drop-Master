@@ -1,0 +1,16 @@
+import scrapy
+from applications.PriceDropMaster.modules.targetItem import *
+
+class TestSpider(scrapy.Spider):
+    name = 'testSpider'
+
+    def __init__(self, startUrl, *args, **kwargs):
+        super(TestSpider, self).__init__(*args, **kwargs)
+        self.start_urls = [startUrl]
+        self.item = TargetItem()
+
+    def parse(self, response):
+        #item = TargetItem()
+        self.item['name'] = 'test'
+        self.item['price'] = '0'
+        yield self.item

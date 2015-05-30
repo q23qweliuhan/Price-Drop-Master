@@ -1,0 +1,11 @@
+import scrapy
+import targetItem
+
+class TestSpider(scrapy.Spider):
+    name = 'testSpider'
+
+    def __init__(self, startUrl, *args, **kwargs):
+        super(TestSpider, self).__init__(*args, **kwargs)
+        self.start_urls = [startUrl]
+
+    def parse(self, response):

@@ -1,0 +1,8 @@
+{{response.title = 'Success!'}}
+
+{{extend 'layout.html'}}
+
+<h1>The current price of your item is <strong class="define">{{=session.price}}</strong>.</h1>
+
+<footer>A notification e-mail will be sent to your address.<br/>
+    You can manage your subscriptions through the link in this email.</footer>

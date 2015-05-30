@@ -1,0 +1,6 @@
+div.span12>form>table{
+    position: relative;
+    display: block;
+    margin-left: -185px;
+    width: 370px;
+    left: 50%;}
